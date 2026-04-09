@@ -202,26 +202,26 @@ typedef struct
 
     struct
     {
-        uint16_t X;
-        uint16_t Y;
+        int16_t X;
+        int16_t Y;
         bool     Button0;
         bool     Button1;
     } Current;
 
     struct
     {
-        uint16_t X;
-        uint16_t Y;
+        int16_t X;
+        int16_t Y;
         bool     Button0;
         bool     Button1;
     } Last;
 
     struct
     {
-        uint16_t MinX;
-        uint16_t MinY;
-        uint16_t MaxX;
-        uint16_t MaxY;
+        int16_t MinX;
+        int16_t MinY;
+        int16_t MaxX;
+        int16_t MaxY;
     } Clamp;
 
 } TA2Mouse;
@@ -362,8 +362,8 @@ static void mouseCommandReadMem()
 
 static void mouseCommandClamp()
 {
-    uint16_t MinClamp = Mouse.WriteBuffer[3] | (Mouse.WriteBuffer[1] << 8);
-    uint16_t MaxClamp = Mouse.WriteBuffer[2] | (Mouse.WriteBuffer[0] << 8);
+    int16_t MinClamp = Mouse.WriteBuffer[3] | (Mouse.WriteBuffer[1] << 8);
+    int16_t MaxClamp = Mouse.WriteBuffer[2] | (Mouse.WriteBuffer[0] << 8);
 
     if (MinClamp > MaxClamp)
     {
@@ -492,12 +492,12 @@ static void mouseControllerRead(uint8_t portB)
         if (Pia.IB & PIA_PORTB_RDREADY)
         {
             DEBUG_PRINT("mouseControllerRead: read complete, ReadPos=%u\n",Mouse.ReadPos);
-            if (Mouse.ReadPos > 0)
+            //if (Mouse.ReadPos > 0)
                 Mouse.ReadPos--;
-            else
-            {
+            //else
+            //{
                 DEBUG_PRINT("MOUSE: Unexpected read. Command=%02x\n", Mouse.Command);
-            }
+            //}
             // clear read-ready flag
             PIA6520_inputB(Pia.IB & ~PIA_PORTB_RDREADY);
         }
@@ -528,8 +528,8 @@ static void mouseControllerRead(uint8_t portB)
 /** Mouse movement reports are processed here. */
 void mouseControllerMoveXY(int8_t X, int8_t Y)
 {
-    uint16_t OldX = Mouse.Current.X;
-    uint16_t OldY = Mouse.Current.Y;
+    int16_t OldX = Mouse.Current.X;
+    int16_t OldY = Mouse.Current.Y;
 
     // update current position, avoid over- and underflows, clamp to range
     if (X>0)
