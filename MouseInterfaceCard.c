@@ -204,16 +204,16 @@ typedef struct
     {
         int16_t X;
         int16_t Y;
-        bool     Button0;
-        bool     Button1;
+        bool    Button0;
+        bool    Button1;
     } Current;
 
     struct
     {
         int16_t X;
         int16_t Y;
-        bool     Button0;
-        bool     Button1;
+        bool    Button0;
+        bool    Button1;
     } Last;
 
     struct
@@ -492,12 +492,12 @@ static void mouseControllerRead(uint8_t portB)
         if (Pia.IB & PIA_PORTB_RDREADY)
         {
             DEBUG_PRINT("mouseControllerRead: read complete, ReadPos=%u\n",Mouse.ReadPos);
-            //if (Mouse.ReadPos > 0)
+            if (Mouse.ReadPos > 0)
                 Mouse.ReadPos--;
-            //else
-            //{
+            else
+            {
                 DEBUG_PRINT("MOUSE: Unexpected read. Command=%02x\n", Mouse.Command);
-            //}
+            }
             // clear read-ready flag
             PIA6520_inputB(Pia.IB & ~PIA_PORTB_RDREADY);
         }
