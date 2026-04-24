@@ -10,7 +10,7 @@ On the Apple IIgs ROM 3 (in contrast to ROM 00/01), most 16-bit software - incl.
 
 ## Usage
 
-Both left and right USB mouse buttons are mapped to the single AppleMouse II button. The middle USB mouse button is is mapped to a (normally non-existent) second Apple II mouse button.
+The left USB mouse button is mapped to the single AppleMouse II button. The right and middle USB mouse buttons are mapped to a (normally non-existent) second Apple II mouse button. This is supported in the [PLASMA mouse module](https://github.com/dschmenk/PLASMA/blob/master/src/inc/mouse.plh) and the [a2pi daemon](https://github.com/dschmenk/apple2pi/tree/master).
 
 Some adapter is required to connect the USB-A plug of a USB mouse to the the Micro USB socket of the A2Pico:
 
