@@ -96,14 +96,14 @@ static void process_mouse_report(hid_mouse_report_t const *report)
 //    }
 //    printf("(%d %d %d)\n", report->x, report->y, report->wheel);
 
-    if (button_changed_mask & (MOUSE_BUTTON_LEFT | MOUSE_BUTTON_RIGHT))
+    if (button_changed_mask & MOUSE_BUTTON_LEFT)
     {
-        bool pressed = (report->buttons & (MOUSE_BUTTON_LEFT | MOUSE_BUTTON_RIGHT)) != 0;
+        bool pressed = (report->buttons & MOUSE_BUTTON_LEFT) != 0;
         mouseControllerUpdateButton(0, pressed);
     }
-    if (button_changed_mask & MOUSE_BUTTON_MIDDLE)
+    if (button_changed_mask & (MOUSE_BUTTON_MIDDLE | MOUSE_BUTTON_RIGHT))
     {
-        bool pressed = (report->buttons & MOUSE_BUTTON_MIDDLE) != 0;
+        bool pressed = (report->buttons & (MOUSE_BUTTON_MIDDLE | MOUSE_BUTTON_RIGHT)) != 0;
         mouseControllerUpdateButton(1, pressed);
     }
     if (report->x || report->y)
